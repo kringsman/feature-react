@@ -11,11 +11,10 @@ import '../assets/styles/App.scss';
 
 const API = 'http://localhost:3000/initalState'
 
-const App = () => {
+const Home = () => {
     const initalState = useInitialState(API);
     return initalState.length === 0 ? <h1> Loading...</h1> : (
-        <div className="App">
-            <Header />
+        <>
             <Search />
             {initalState.mylist.length > 0 &&
                 <Categories title="Mi Lista">
@@ -26,7 +25,6 @@ const App = () => {
                     </Carousel>
                 </Categories>
             }
-
                 <Categories title="Tendencias">
                     <Carousel>
                         {initalState.trends.map( item => 
@@ -34,17 +32,15 @@ const App = () => {
                         )}                        
                         </Carousel>
                 </Categories>
-
-            <Categories title="originales de Platzi Video">
+            <Categories title="Originales de Platzi Video">
                 <Carousel>
                     {initalState.originals.map(item =>
                         <CarouselItem key={item.id} {...item} />
                     )}
                 </Carousel>
-            </Categories>
-        <Footer />
-    </div>    
+            </Categories>        
+        </>   
     );
 };
 
-export default App;
+export default Home;
